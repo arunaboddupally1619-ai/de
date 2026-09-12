@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIHub — All AI Tools</title>
+<style>
+:root{--bg:#070a12;--card:#101522;--card2:#141a29;--text:#f7f8fc;--muted:#9ba5b7;--line:#222a3b;--accent:#7c5cff;--accent2:#20d9ff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 15% 0%,#172044 0,#070a12 38%),#070a12;color:var(--text)}
+a{text-decoration:none;color:inherit}.nav{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 6%;backdrop-filter:blur(15px);position:sticky;top:0;background:#070a12cc;z-index:5}
+.logo{font-weight:900;font-size:22px}.logo span{color:var(--accent2)}.navlinks{display:flex;gap:25px;color:#c6ccda;font-size:14px}.btn{border:1px solid #39425a;background:#151b2a;color:white;border-radius:10px;padding:10px 16px;font-weight:700}
+.hero{max-width:1100px;margin:auto;padding:85px 20px 45px;text-align:center}.pill{display:inline-block;border:1px solid #303957;background:#10172a;color:#b9c2ff;padding:8px 13px;border-radius:99px;font-size:13px}
+h1{font-size:clamp(42px,7vw,76px);line-height:1;margin:20px 0 18px;letter-spacing:-3px}.gradient{background:linear-gradient(90deg,#fff,#a99cff,#42e5ff);-webkit-background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:650px;margin:auto;font-size:18px;line-height:1.6}.search{margin:32px auto 12px;max-width:700px;display:flex;background:#0f1523;border:1px solid #30384d;border-radius:14px;padding:7px}.search input{flex:1;background:none;border:0;outline:0;color:#fff;padding:13px;font-size:16px}.search button{border:0;border-radius:10px;background:linear-gradient(135deg,var(--accent),#4b8cff);color:#fff;padding:0 22px;font-weight:800}
+.wrap{max-width:1180px;margin:auto;padding:25px 20px 70px}.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:25px}.filter{background:#0e1420;border:1px solid var(--line);color:#bfc6d5;border-radius:999px;padding:9px 15px;cursor:pointer}.filter.active{background:#211b4d;border-color:#6556d9;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.card{background:linear-gradient(180deg,#111827,#0d121d);border:1px solid var(--line);border-radius:18px;padding:20px;transition:.2s}.card:hover{transform:translateY(-4px);border-color:#465071}.icon{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:#1b2233;font-size:22px;margin-bottom:16px}.card h3{margin:0 0 8px}.card p{margin:0 0 18px;color:var(--muted);font-size:14px;line-height:1.5}.tag{font-size:11px;color:#9fa9bb;background:#171e2d;border-radius:6px;padding:5px 8px}.open{float:right;color:#fff;background:#252d42;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:700}
+footer{border-top:1px solid var(--line);padding:30px 6%;color:#778196;text-align:center;font-size:13px}
+@media(max-width:650px){.navlinks{display:none}.nav{padding:0 18px}.hero{padding-top:60px}h1{letter-spacing:-2px}.search button{padding:0 15px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="logo">AI<span>Hub</span></div><div class="navlinks"><a href="#tools">Tools</a><a href="#categories">Categories</a><a href="#about">About</a></div><button class="btn">Submit Tool</button></nav>
+<section class="hero">
+<div class="pill">⚡ Discover the best AI tools in one place</div>
+<h1>One Hub.<br><span class="gradient">Every AI Tool.</span></h1>
+<p>Find powerful AI tools for images, video, writing, coding, study, voice, music and productivity — all in one beautiful dashboard.</p>
+<div class="search"><input id="search" placeholder="Search AI tools…"><button onclick="filterTools()">Search</button></div>
+</section>
+<main class="wrap" id="tools">
+<div class="filters" id="categories">
+<button class="filter active" onclick="setCat('All',this)">All</button>
+<button class="filter" onclick="setCat('Writing',this)">✍️ Writing</button>
+<button class="filter" onclick="setCat('Image',this)">🎨 Image</button>
+<button class="filter" onclick="setCat('Video',this)">🎬 Video</button>
+<button class="filter" onclick="setCat('Coding',this)">💻 Coding</button>
+<button class="filter" onclick="setCat('Voice',this)">🎙️ Voice</button>
+<button class="filter" onclick="setCat('Study',this)">📚 Study</button>
+</div>
+<div class="grid" id="grid"></div>
+</main>
+<footer id="about">AIHub © 2026 — A modern directory for discovering AI tools.</footer>
+<script>
+const tools=[
+["ChatGPT","Writing","🤖","AI assistant for writing, brainstorming and everyday questions.","https://chatgpt.com/"],
+["Claude","Writing","🧠","AI assistant for writing, analysis and long documents.","https://claude.ai/"],
+["Gemini","Writing","✨","Google's AI assistant for research, writing and more.","https://gemini.google.com/"],
+["Midjourney","Image","🖼️","Create imaginative AI-generated artwork from prompts.","https://www.midjourney.com/"],
+["Adobe Firefly","Image","🔥","Generate and edit creative visuals with AI.","https://firefly.adobe.com/"],
+["Runway","Video","🎬","AI-powered video generation and creative editing.","https://runwayml.com/"],
+["Pika","Video","⚡","Create and transform short videos with AI.","https://pika.art/"],
+["GitHub Copilot","Coding","⌨️","AI pair programmer that helps write and understand code.","https://github.com/features/copilot"],
+["Cursor","Coding","🖱️","AI-first code editor for building software faster.","https://www.cursor.com/"],
+["ElevenLabs","Voice","🎙️","AI voice generation and speech technology.","https://elevenlabs.io/"],
+["Suno","Voice","🎵","Create songs and music with generative AI.","https://suno.com/"],
+["Perplexity","Study","🔎","AI search and research with cited answers.","https://www.perplexity.ai/"]
+];
+let cat="All";
+function render(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const list=tools.filter(t=>(cat==="All"||t[1]===cat)&&t.join(" ").toLowerCase().includes(q));
+ document.getElementById("grid").innerHTML=list.map(t=>`<article class="card"><div class="icon">${t[2]}</div><h3>${t[0]}</h3><p>${t[3]}</p><span class="tag">${t[1]}</span><a class="open" href="${t[4]}" target="_blank" rel="noopener">Open ↗</a></article>`).join("")||"<p>No tools found.</p>";
+}
+function setCat(c,el){cat=c;document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));el.classList.add("active");render()}
+function filterTools(){render()}
+document.getElementById("search").addEventListener("input",render);render();
+</script>
+</body>
+</html>
